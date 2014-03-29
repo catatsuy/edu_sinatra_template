@@ -7,15 +7,16 @@
   </head>
   <body>
     <div>
-      <p>こんにちは</p>
-      <%= escape_html("<script>alert('sample')</script>") %>
-      <p>
-      <% if 3 % 2 == 1 %>
-      ここは表示される
-      <% else %>
-      ここは表示されない
-      <% end %>
-      </p>
+      <p>掲示板の例</p>
+      <form method="post" id="ex-form" action="/">
+        <textarea rows="10" cols="30" name="ex-text" id="ex-text"></textarea>
+        <input type="submit" name="submit" value="submit" />
+      </form>
+      <div>
+        <% posts.each do |post| %>
+        <div><%= escape_html post["text"] %></div>
+        <% end %>
+      </div>
     </div>
   </body>
 </html>

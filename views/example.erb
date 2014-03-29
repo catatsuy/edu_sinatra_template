@@ -8,13 +8,17 @@
   <body>
     <div>
       <p>掲示板の例</p>
-      <form method="post" id="ex-form" action="/">
+      <form method="post" id="ex-form" action="/" enctype="multipart/form-data">
         <textarea rows="10" cols="30" name="ex-text" id="ex-text"></textarea>
+        <input type="file" name="file" value="file" />
         <input type="submit" name="submit" value="submit" />
       </form>
       <div>
         <% posts.each do |post| %>
-        <div><%= escape_html post["text"] %></div>
+        <div>
+          <%= escape_html post["text"] %><br>
+          <img src="./images/<%= post["img_file_name"] %>" alt="<%= post["img_file_name"] %>"/>
+        </div>
         <% end %>
       </div>
     </div>

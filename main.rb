@@ -15,7 +15,7 @@ post '/' do
 
   if params["file"]
     # Content Type は信用ならないが，教育用のために妥協
-    # Content Type から拡張子を決定して適当な名前で保存
+    # Content Type から拡張子を決定する
     ext = ""
     if params["file"][:type].include? "jpeg"
       ext = "jpg"
@@ -28,6 +28,8 @@ post '/' do
     # 適当なファイル名を付ける
     file_name = "#{SecureRandom.hex}.#{ext}"
     save_path = "./public/images/#{file_name}"
+
+    # 画像を保存
     File.open(save_path, 'wb') do |f|
       f.write params["file"][:tempfile].read
     end

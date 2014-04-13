@@ -11,7 +11,7 @@ get '/' do
 end
 
 post '/' do
-  file_name = nil
+  file_name = ""
 
   if params["file"]
     # Content Type は信用ならないが，教育用のために妥協

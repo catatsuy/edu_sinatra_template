@@ -2,15 +2,16 @@
 
 For education
 
-教育用で脆弱性には目をつぶっているので本番環境で利用しないでください
+教育用で大幅な割り切りといくつかの脆弱性には目をつぶっているので本番環境では絶対に利用しないでください．
 
 ## install
 
-    bundle install
+    gem install sinatra
+    gem install sqlite3
 
 ## running
 
-    bundle exec ruby main.rb
+    ruby main.rb
 
 ## schema
 

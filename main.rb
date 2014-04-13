@@ -7,7 +7,7 @@ db.results_as_hash = true
 
 get '/' do
   posts = db.execute("SELECT id, text, img_file_name FROM posts ORDER BY ID DESC LIMIT 10")
-  erb :example, locals: { posts: posts }
+  erb :example, { :locals => { :posts => posts } }
 end
 
 post '/' do
@@ -15,23 +15,21 @@ post '/' do
 
   if params["file"]
     # Content Type は信用ならないが，教育用のために妥協
-    image_reg = /\Aimage\/(?<image_type>jpeg|(?:x-)?png)\Z/
-    match = image_reg.match params["file"][:type]
-    unless match
+    # Content Type から拡張子を決定して適当な名前で保存
+    ext = ""
+    if params["file"][:type].include? "jpeg"
+      ext = "jpg"
+    elsif params["file"][:type].include? "png"
+      ext = "png"
+    else
       return "error"
     end
 
-    # Content Type から拡張子を決定して適当な名前で保存
-    ext = nil
-    if match[:image_type].include? "jpeg"
-      ext = "jpg"
-    elsif match[:image_type].include? "png"
-      ext = "png"
-    end
+    # 適当なファイル名を付ける
     file_name = "#{SecureRandom.hex}.#{ext}"
     save_path = "./public/images/#{file_name}"
     File.open(save_path, 'wb') do |f|
-      f.write params[:file][:tempfile].read
+      f.write params["file"][:tempfile].read
     end
   end
 

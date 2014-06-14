@@ -40,3 +40,17 @@ post '/' do
   stmt.execute
   redirect '/'
 end
+
+get "/star" do
+  post_id = params["post-id"].to_i
+  # db.execute("BEGIN TRANSACTION")
+  post = db.execute("SELECT star_count FROM posts WHERE id = ?", post_id)
+  if post.empty?
+    return "error"
+  end
+  stmt = db.prepare("UPDATE posts SET star_count = ? WHERE id = ?")
+  stmt.bind_params(post[0]["star_count"] + 1, post_id)
+  stmt.execute
+  # db.execute("END TRANSACTION")
+  return "スターを付けました"
+end

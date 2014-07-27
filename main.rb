@@ -26,11 +26,10 @@ post '/' do
     end
 
     # 適当なファイル名を付ける
-    file_name = "#{SecureRandom.hex}.#{ext}"
-    save_path = "./public/images/#{file_name}"
+    file_name = SecureRandom.hex + "." + ext
 
     # 画像を保存
-    File.open(save_path, 'wb') do |f|
+    File.open("./public/uploads/" + file_name, 'wb') do |f|
       f.write params["file"][:tempfile].read
     end
   end
@@ -43,7 +42,6 @@ end
 
 get "/star" do
   post_id = params["post-id"].to_i
-  # db.execute("BEGIN TRANSACTION")
   post = db.execute("SELECT star_count FROM posts WHERE id = ?", post_id)
   if post.empty?
     return "error"
@@ -51,6 +49,5 @@ get "/star" do
   stmt = db.prepare("UPDATE posts SET star_count = ? WHERE id = ?")
   stmt.bind_params(post[0]["star_count"] + 1, post_id)
   stmt.execute
-  # db.execute("END TRANSACTION")
   return "スターを付けました"
 end

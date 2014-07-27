@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <title>sample</title>
-    <link href="/css/main.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/css/main.css" media="screen" rel="stylesheet" type="text/css">
   </head>
   <body>
     <div>
       <p>掲示板の例</p>
       <form method="post" id="ex-form" action="/" enctype="multipart/form-data">
         <textarea rows="10" cols="30" name="ex-text" id="ex-text"></textarea>
-        <input type="file" name="file" value="file" />
-        <input type="submit" name="submit" value="submit" />
+        <input type="file" name="file" value="file">
+        <input type="submit" name="submit" value="submit">
       </form>
       <div>
         <% posts.each do |post| %>

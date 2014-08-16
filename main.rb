@@ -1,12 +1,13 @@
 require 'sinatra'
 require 'sqlite3'
-require "securerandom"
+require 'securerandom'
+require 'sinatra/json'
 
 db = SQLite3::Database.new "db/test.db"
 db.results_as_hash = true
 
 get '/' do
-  posts = db.execute("SELECT id, text, img_file_name FROM posts ORDER BY ID DESC LIMIT 10")
+  posts = db.execute("SELECT id, text, img_file_name, star_count FROM posts ORDER BY ID DESC LIMIT 10")
   erb :example, { :locals => { :posts => posts } }
 end
 
@@ -35,19 +36,23 @@ post '/' do
   end
 
   stmt = db.prepare("INSERT INTO posts (text, img_file_name) VALUES (?, ?)")
-  stmt.bind_params(params["ex-text"], file_name)
+  stmt.bind_params(params["ex_text"], file_name)
   stmt.execute
   redirect '/'
 end
 
 get "/star" do
-  post_id = params["post-id"].to_i
+  post_id = params["post_id"].to_i
   post = db.execute("SELECT star_count FROM posts WHERE id = ?", post_id)
   if post.empty?
     return "error"
   end
+
+  new_star_count = post[0]["star_count"] + 1
   stmt = db.prepare("UPDATE posts SET star_count = ? WHERE id = ?")
-  stmt.bind_params(post[0]["star_count"] + 1, post_id)
+  stmt.bind_params(new_star_count, post_id)
   stmt.execute
-  return "スターを付けました"
+
+  response = { "star_count" => new_star_count }
+  json response
 end

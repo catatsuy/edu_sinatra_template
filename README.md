@@ -8,6 +8,7 @@ For education
 
     gem install sinatra
     gem install sqlite3
+    gem install sinatra-contrib
 
 ## running
 

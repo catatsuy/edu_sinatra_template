@@ -9,18 +9,23 @@
     <div>
       <p>掲示板の例</p>
       <form method="post" id="ex-form" action="/" enctype="multipart/form-data">
-        <textarea rows="10" cols="30" name="ex-text" id="ex-text"></textarea>
+        <textarea rows="10" cols="30" name="ex_text" id="ex-text"></textarea>
         <input type="file" name="file" value="file">
         <input type="submit" name="submit" value="submit">
       </form>
       <div>
         <% posts.each do |post| %>
-        <div>
-          <%= escape_html post["text"] %><br>
-          <img src="./uploads/<%= post["img_file_name"] %>" alt="<%= post["img_file_name"] %>" class="ex-image">
+        <div class="post">
+          <div>
+            <%= escape_html post["text"] %><br>
+            <img src="./uploads/<%= post["img_file_name"] %>" alt="<%= post["img_file_name"] %>" class="ex-image">
+          </div>
+          <span class="add-star" data-post-id="<%= post["id"] %>"><%= post["star_count"] %></span>
         </div>
         <% end %>
       </div>
     </div>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/main.js"></script>
   </body>
 </html>

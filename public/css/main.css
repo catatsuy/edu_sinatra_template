@@ -1,3 +1,15 @@
 .ex-image {
   max-width: 300px;
 }
+
+.add-star {
+  cursor: pointer;
+}
+
+.add-star:hover {
+  text-decoration: underline;
+}
+
+.add-star:before {
+  content: "★";
+}

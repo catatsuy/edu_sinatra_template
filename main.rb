@@ -33,6 +33,8 @@ post '/' do
     File.open("./public/uploads/" + file_name, 'wb') do |f|
       f.write params["file"][:tempfile].read
     end
+  else
+    return "画像が必須です"
   end
 
   stmt = db.prepare("INSERT INTO posts (text, img_file_name) VALUES (?, ?)")

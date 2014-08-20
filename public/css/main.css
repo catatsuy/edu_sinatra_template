@@ -60,4 +60,5 @@ textarea {
 
 .add-star:before {
   content: "★";
+  color: yellow;
 }

@@ -3,7 +3,7 @@ require 'sqlite3'
 require 'securerandom'
 require 'sinatra/json'
 
-db = SQLite3::Database.new "db/test.db"
+db = SQLite3::Database.new "db/post.db"
 db.results_as_hash = true
 
 get '/' do

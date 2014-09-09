@@ -23,7 +23,7 @@ post '/' do
     elsif params["file"][:type].include? "png"
       ext = "png"
     else
-      return "error"
+      return "投稿できる画像形式はjpgとpngだけです"
     end
 
     # 適当なファイル名を付ける

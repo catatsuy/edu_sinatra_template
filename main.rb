@@ -7,7 +7,7 @@ db = SQLite3::Database.new "db/post.db"
 db.results_as_hash = true
 
 get '/' do
-  posts = db.execute("SELECT id, text, img_file_name, star_count FROM posts ORDER BY id DESC LIMIT 10")
+  posts = db.execute("SELECT * FROM posts ORDER BY id DESC LIMIT 10")
   erb :example, { :locals => { :posts => posts } }
 end
 

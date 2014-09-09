@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>sample</title>
-    <link href="/css/main.css" media="screen" rel="stylesheet" type="text/css">
-  </head>
-  <body>
-    <div class="container">
-      <h1>掲示板の例</h1>
-      <div class="submit">
-        <form method="post" id="ex-form" action="/" enctype="multipart/form-data">
-          <div class="form-text">
-            <textarea name="ex_text" id="ex-text"></textarea>
+<head>
+  <meta charset="utf-8">
+  <title>sample</title>
+  <link href="/css/main.css" media="screen" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div class="container">
+    <h1>掲示板の例</h1>
+    <div class="submit">
+      <form method="post" id="ex-form" action="/" enctype="multipart/form-data">
+        <div class="form-text">
+          <textarea name="ex_text" id="ex-text"></textarea>
+        </div>
+        <div class="form-file">
+          <input type="file" name="file" value="file">
+        </div>
+        <div class="form-submit">
+          <input type="submit" name="submit" value="submit">
+        </div>
+      </form>
+    </div>
+    <div>
+      <% posts.each do |post| %>
+      <div class="post">
+        <div class="context">
+          <div class="post-text">
+            <%= escape_html post["text"] %>
           </div>
-          <div class="form-file">
-            <input type="file" name="file" value="file">
-          </div>
-          <div class="form-submit">
-            <input type="submit" name="submit" value="submit">
-          </div>
-        </form>
-      </div>
-      <div>
-        <% posts.each do |post| %>
-        <div class="post">
-          <div class="context">
-            <div class="post-text">
-              <%= escape_html post["text"] %>
-            </div>
-            <div class="post-image">
-              <img src="/uploads/<%= post["img_file_name"] %>" alt="<%= post["img_file_name"] %>" class="ex-image">
-            </div>
-          </div>
-          <div class="tools">
-            <span class="add-star" data-post-id="<%= post["id"] %>"><%= post["star_count"] %></span>
+          <div class="post-image">
+            <img src="/uploads/<%= post["img_file_name"] %>" alt="<%= post["img_file_name"] %>" class="ex-image">
           </div>
         </div>
-        <% end %>
+        <div class="tools">
+          <span class="add-star" data-post-id="<%= post["id"] %>"><%= post["star_count"] %></span>
+        </div>
       </div>
+      <% end %>
     </div>
-    <script src="/js/jquery.js"></script>
-    <script src="/js/main.js"></script>
-  </body>
+  </div>
+  <script src="/js/jquery.js"></script>
+  <script src="/js/main.js"></script>
+</body>
 </html>

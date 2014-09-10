@@ -24,13 +24,11 @@
     <div>
       <% posts.each do |post| %>
       <div class="post">
-        <div class="context">
-          <div class="post-text">
-            <%= escape_html post["text"] %>
-          </div>
-          <div class="post-image">
-            <img src="/uploads/<%= post["img_file_name"] %>" alt="<%= post["img_file_name"] %>" class="ex-image">
-          </div>
+        <div class="post-text">
+          <%= escape_html post["text"] %>
+        </div>
+        <div class="post-image">
+          <img src="/uploads/<%= post["img_file_name"] %>" alt="<%= post["img_file_name"] %>" class="ex-image">
         </div>
         <div class="tools">
           <span class="add-star" data-post-id="<%= post["id"] %>"><%= post["star_count"] %></span>
